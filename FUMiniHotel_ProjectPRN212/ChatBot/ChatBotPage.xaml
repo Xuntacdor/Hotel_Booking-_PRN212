@@ -1,0 +1,65 @@
+﻿<Page x:Class="FUMiniHotel_ProjectPRN212.ChatBot.ChatBotPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="clr-namespace:FUMiniHotel_ProjectPRN212.ChatBot"
+      Title="ChatBot">
+
+    <Page.Resources>
+        <!-- User bubble -->
+        <Style x:Key="ChatBubbleUser" TargetType="Border">
+            <Setter Property="Background" Value="#3F83F8"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+
+        <!-- AI bubble -->
+        <Style x:Key="ChatBubbleAI" TargetType="Border">
+            <Setter Property="Background" Value="#E5E7EB"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Messages area -->
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Name="ChatScroll">
+            <ItemsControl ItemsSource="{Binding Messages}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border x:Name="ChatBubble" Style="{StaticResource ChatBubbleAI}">
+                            <TextBlock Text="{Binding Message}"
+                                       TextWrapping="Wrap"
+                                       Foreground="Black" />
+                        </Border>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding IsUser}" Value="True">
+                                <Setter TargetName="ChatBubble"
+                                        Property="Style"
+                                        Value="{StaticResource ChatBubbleUser}" />
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <!-- Input area -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10">
+            <TextBox Width="500" Height="40"
+                     Text="{Binding CurrentMessage, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="Send" Width="80" Margin="10,0,0,0"
+                    Command="{Binding SendMessageCommand}"/>
+        </StackPanel>
+
+    </Grid>
+</Page>

@@ -93,6 +93,15 @@
                             <TextBlock Text="Thay đổi mật khẩu" Style="{StaticResource menuButtonText}"/>
                         </StackPanel>
                     </ToggleButton>
+                    <!-- ChatBot -->
+                    <ToggleButton x:Name="ChatBotButton" Style="{StaticResource menuButton}"
+                         Tag="{StaticResource color1}"
+                         Click="ChatBotButton_Click" >
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Robot" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Trợ lý ảo" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </ToggleButton>
                     <!-- Đăng xuất -->
                     <ToggleButton x:Name="LogoutButton" Style="{StaticResource menuButton}"
                          Tag="{StaticResource color1}"

@@ -110,6 +110,13 @@ namespace FUMiniHotel_ProjectPRN212.Customer
             MainContent.NavigationService.Navigate(new FUMiniHotel_ProjectPRN212.Pages.CustomerBookingPage());
         }
 
+        private void ChatBotButton_Click(object sender, RoutedEventArgs e)
+        {
+            UncheckAllButtons();
+            ((ToggleButton)sender).IsChecked = true;
+            MainContent.NavigationService.Navigate(new FUMiniHotel_ProjectPRN212.ChatBot.ChatBotPage(_loggedInCustomerId));
+        }
+
         private void LogOutButton_Click(object sender, RoutedEventArgs e)
         {
 
@@ -126,8 +133,11 @@ namespace FUMiniHotel_ProjectPRN212.Customer
         private void UncheckAllButtons()
         {
             HomeButton.IsChecked = false;
+            ProfileButton.IsChecked = false;
             RoomsButton.IsChecked = false;
             BookingsButton.IsChecked = false;
+            ChangePasswordButton.IsChecked = false;
+            ChatBotButton.IsChecked = false;
             LogoutButton.IsChecked = false;
         }
         private void LoadCustomerInfo()
