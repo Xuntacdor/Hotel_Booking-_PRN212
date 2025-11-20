@@ -1,14 +1,14 @@
-﻿<Page x:Class="FUMiniHotel_ProjectPRN212.Room.RoomManagement"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<Page x:Class="FUMiniHotel_ProjectPRN212.Service.ServiceManagement"
+     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-      xmlns:local="clr-namespace:FUMiniHotel_ProjectPRN212.Room"
+      xmlns:local="clr-namespace:FUMiniHotel_ProjectPRN212"
       xmlns:converters="clr-namespace:FUMiniHotel_ProjectPRN212.Converters"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="1300"
-      Title="RoomManagement"
+      d:DesignHeight="450" d:DesignWidth="1000"
+      Title="ServiceManagement"
       Background="Transparent">
 
     <Page.Resources>
@@ -37,7 +37,7 @@
 
             <!-- Header và thanh tìm kiếm -->
             <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,10,0,20">
-                <TextBlock Text="Quản lý Phòng"
+                <TextBlock Text="Quản Lý Dịch Vụ"
                            Foreground="{StaticResource titleColor2}"
                            FontSize="24"
                            FontFamily="Montserrat"
@@ -48,7 +48,7 @@
                 <!-- Ô tìm kiếm -->
                 <Grid>
                     <TextBox x:Name="txtSearch" 
-                     Width="200" 
+                     Width="300" 
                      Height="30" 
                      Padding="5"
                      VerticalAlignment="Center" 
@@ -60,7 +60,7 @@
                      TextChanged="txtSearch_TextChanged"/>
 
                     <TextBlock x:Name="txtPlaceholder"
-                     Text="Nhập số phòng hoặc mô tả..."
+                     Text="Nhập tên dịch vụ..."
                      Foreground="{StaticResource plainTextColor3}"
                      FontSize="14"
                      VerticalAlignment="Center"
@@ -69,49 +69,20 @@
                      Visibility="{Binding ElementName=txtSearch, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                 </Grid>
 
-                <!-- ComboBox trạng thái -->
-                <ComboBox x:Name="cbStatus" 
-                          Width="120" 
-                          Height="30" 
-                          Margin="10,0,0,0"
-                          SelectedIndex="0"
-                          SelectionChanged="cbStatus_SelectionChanged">
-                    <ComboBoxItem Content="Tất cả"/>
-                    <ComboBoxItem Content="Còn phòng"/>
-                    <ComboBoxItem Content="Hết phòng"/>
-                </ComboBox>
-
-                <!-- DatePicker tìm phòng trống -->
-                <StackPanel Orientation="Vertical" Margin="20,0,10,0">
-                    <TextBlock Text="Ngày bắt đầu" Foreground="{StaticResource plainTextColor3}" FontSize="14" FontWeight="Bold"/>
-                    <DatePicker x:Name="dpStartDate" Width="120" Height="30" SelectedDateFormat="Short"/>
-                </StackPanel>
-
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Ngày kết thúc" Foreground="{StaticResource plainTextColor3}" FontSize="14" FontWeight="Bold"/>
-                    <DatePicker x:Name="dpEndDate" Width="120" Height="30" SelectedDateFormat="Short"/>
-                </StackPanel>
-
-                <!-- Nút tìm kiếm theo ngày -->
-                <Button Content="Áp dụng ngày" 
-                        Click="SearchByDate_Click"
-                        Margin="10,10,0,0"
-                        Width="100"
-                        Height="30"
-                        FontWeight="Bold"/>
-
-                <!-- Nút xóa lọc ngày -->
-                <Button Content="Xóa lọc ngày" 
-                        Click="ClearDateFilter_Click"
-                        Margin="5,10,0,0"
-                        Width="100"
-                        Height="30"
-                        FontWeight="Bold"
-                        Background="LightGray"/>
+                <!-- Nút thêm mới -->
+                <Button Margin="20,0,0,0"
+                        Style="{StaticResource iconButton}"
+                        Tag="{StaticResource color1}"
+                        Click="BtnAdd_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="Plus" Foreground="White" Margin="0,0,5,0" Style="{StaticResource menuButtonIcon}"/>
+                        <TextBlock Text="Thêm mới"/>
+                    </StackPanel>
+                </Button>
             </StackPanel>
 
-            <!-- Danh sách phòng -->
-            <DataGrid x:Name="dgRooms" Grid.Row="1" AutoGenerateColumns="False"
+            <!-- Danh sách dịch vụ -->
+            <DataGrid x:Name="dgServices" Grid.Row="1" AutoGenerateColumns="False"
                       Background="Transparent"
                       Foreground="{StaticResource plainTextColor3}"
                       BorderBrush="{StaticResource plainTextColor3}"
@@ -124,31 +95,31 @@
                       IsReadOnly="True"
                       SelectionMode="Single"
                       SelectionUnit="FullRow"
-                      Margin="0,10,0,40">
+                      Margin="0,10,0,0">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Số phòng" Binding="{Binding RoomNumber}" Width="*"/>
-                    <DataGridTextColumn Header="Loại phòng" Binding="{Binding RoomType.TypeName}" Width="1.5*"/>
+                    <DataGridTextColumn Header="Mã DV" Binding="{Binding ServiceId}" Width="*"/>
+                    <DataGridTextColumn Header="Tên dịch vụ" Binding="{Binding ServiceName}" Width="2*"/>
                     <DataGridTextColumn Header="Mô tả" Binding="{Binding Description}" Width="2*"/>
-                    <DataGridTextColumn Header="Sức chứa" Binding="{Binding MaxCapacity}" Width="*"/>
-                    <DataGridTextColumn Header="Giá/ngày" Binding="{Binding PricePerDay, StringFormat='{}{0:N0} VND'}" Width="*"/>
-                    <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="*"/>
-                    <DataGridTemplateColumn Header="Hành động" Width="Auto">
+                    <DataGridTextColumn Header="Giá" Binding="{Binding Price, StringFormat='{}{0:N0} VND'}" Width="*"/>
+                    <DataGridTemplateColumn Header="Thao tác" Width="Auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <StackPanel Orientation="Horizontal">
                                     <Button Style="{StaticResource iconButton}"
-                                            Tag="{StaticResource color1}"
-                                            Click="EditButton_Click"
+                                            Tag="{StaticResource color3}"
+                                            Click="BtnEdit_Click"
                                             Margin="0,0,5,0">
                                         <StackPanel Orientation="Horizontal">
                                             <fa:IconImage Icon="Edit" Foreground="White" Margin="0,0,5,0" Style="{StaticResource menuButtonIcon}"/>
+                                            <TextBlock Text="Sửa"/>
                                         </StackPanel>
                                     </Button>
                                     <Button Style="{StaticResource iconButton}"
                                             Tag="{StaticResource color4}"
-                                            Click="DeleteRoom_Click">
+                                            Click="BtnDelete_Click">
                                         <StackPanel Orientation="Horizontal">
-                                            <fa:IconImage Icon="Remove" Foreground="White" Margin="0,0,5,0" Style="{StaticResource menuButtonIcon}"/>
+                                            <fa:IconImage Icon="Trash" Foreground="White" Margin="0,0,5,0" Style="{StaticResource menuButtonIcon}"/>
+                                            <TextBlock Text="Xóa"/>
                                         </StackPanel>
                                     </Button>
                                 </StackPanel>
@@ -157,23 +128,6 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-
-            <ToggleButton Style="{StaticResource menuButton}"
-                    Tag="{StaticResource color1}"
-                    Width="225" 
-                    Height="40"
-                    FontSize="20"
-                    FontFamily="Montserrat"
-                    FontWeight="Medium"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom"
-                    Margin="0,0,5,5"
-                    Click="AddButton_Click"
-                    Grid.Row="0">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBlock Text="Thêm phòng mới" VerticalAlignment="Center"/>
-                </StackPanel>
-            </ToggleButton>
         </Grid>
     </Border>
 </Page>

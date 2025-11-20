@@ -93,7 +93,7 @@ namespace FUMiniHotel_ProjectPRN212.Employee
         {
             UncheckAllButtons();
             ((ToggleButton)sender).IsChecked = true;
-            MainContent.NavigationService.Navigate(new FUMiniHotel_ProjectPRN212.Room.RoomManagement(false)); // false = không phải Admin
+            MainContent.NavigationService.Navigate(new FUMiniHotel_ProjectPRN212.Room.RoomManagement());
         }
 
         private void InvoicesButton_Click(object sender, RoutedEventArgs e)

@@ -22,13 +22,11 @@ namespace FUMiniHotel_ProjectPRN212.Admin
     /// </summary>
     public partial class AdminDashboard : Window
     {
-
         public AdminDashboard()
         {
             InitializeComponent();
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
-            MainContent.NavigationService.Navigate(new FUMiniHotel_ProjectPRN212.Home());
-
+            Loaded += AdminDashboard_Loaded;
         }
         [DllImport("user32.dll")]
         public static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
@@ -41,7 +39,10 @@ namespace FUMiniHotel_ProjectPRN212.Admin
         {
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
         }
-
+        private void AdminDashboard_Loaded(object sender, RoutedEventArgs e)
+        {
+            MainContent.NavigationService.Navigate(new FUMiniHotel_ProjectPRN212.Home());
+        }
         private void btnMaximize_Click(object sender, RoutedEventArgs e)
         {
             if (this.WindowState == WindowState.Normal)
