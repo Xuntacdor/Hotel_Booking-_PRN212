@@ -15,7 +15,6 @@ public partial class FuminiHotelProjectPrn212Context : DbContext
         : base(options)
     {
     }
-
     public virtual DbSet<Admin> Admins { get; set; }
 
     public virtual DbSet<Booking> Bookings { get; set; }
