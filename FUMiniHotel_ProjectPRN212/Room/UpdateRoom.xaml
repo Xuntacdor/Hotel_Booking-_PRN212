@@ -62,7 +62,7 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
                     <Button Content="Cập nhật"
                         Background="{StaticResource color1}"
-                        Foreground="White"
+                        Foreground="Blue"
                         FontSize="16"
                         FontFamily="Montserrat"
                         FontWeight="Bold"
