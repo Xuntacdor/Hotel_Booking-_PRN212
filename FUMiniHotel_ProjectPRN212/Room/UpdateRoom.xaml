@@ -49,7 +49,7 @@
                 <TextBlock Text="Sức chứa" Foreground="White" FontWeight="Bold"/>
                 <TextBox x:Name="txtMaxCapacity" Margin="0,0,0,10"/>
 
-                <TextBlock Text="Giá/ngày" Foreground="White" FontWeight="Bold"/>
+                <TextBlock Text="Giá/ngày" Foreground="MintCream" FontWeight="Bold"/>
                 <TextBox x:Name="txtPricePerDay" Margin="0,0,0,10"/>
 
                 <TextBlock Text="Trạng thái" Foreground="White" FontWeight="Bold"/>
